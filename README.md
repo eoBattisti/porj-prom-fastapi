@@ -1,1 +1,1 @@
-# FastAPI + OpenTelemetry
+# FastAPI + Prometheus
