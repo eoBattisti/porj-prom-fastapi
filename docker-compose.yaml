@@ -1,0 +1,28 @@
+
+services:
+
+  app:
+    container_name: fastapi
+    build:
+      context: ./fastapi/
+      dockerfile: Dockerfile
+    volumes:
+      - ./fastapi/:/home/fastapi/app
+    command: /bin/sh ./docker/scripts/start.sh
+    ports:
+      - "8000:8000"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8000
+
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./templates/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
+
+networks:
+  otel:
+    driver: bridge
